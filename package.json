@@ -1,0 +1,61 @@
+{
+  "name": "tscli-vscode",
+  "version": "0.0.1",
+  "description": "Syntax highlighting for tscli",
+  "author": "Actual Person <human@nerdintheloop.com> (https://nerdintheloop.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nerdintheloop/tscli-vscode.git"
+  },
+  "bugs": "https://github.com/nerdintheloop/tscli-vscode/issues",
+  "homepage": "https://tscli.nerdintheloop.com",
+  "publisher": "nerdintheloop",
+  "displayName": "tscli",
+  "icon": "./icon.png",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "tscli",
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "dark": "./icon.png",
+          "light": "./icon.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "injectTo": [
+          "source.ts"
+        ],
+        "language": "tscli",
+        "path": "./tscli.json",
+        "scopeName": "tscli"
+      }
+    ]
+  },
+  "keywords": [
+    "bun",
+    "cli",
+    "deno",
+    "syntax",
+    "typescript",
+    "utility"
+  ],
+  "type": "module",
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "devDependencies": {
+    "@nerdintheloop/tscli": "^0.0.1",
+    "@types/bun": "^1.3.11",
+    "@types/node": "^25.5.0",
+    "@vscode/vsce": "^3.7.1",
+    "js-yaml": "^4.1.1",
+    "ovsx": "^0.10.10"
+  }
+}

@@ -1,0 +1,6 @@
+build
+dist
+node_modules
+tasks/aliases
+tasks/aliases.cmd
+tasks/aliases.ps1
