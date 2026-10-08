@@ -2,11 +2,11 @@ import { tscli } from '@nerdintheloop/tscli'
 import packageJSON from '../package.json' with { type: 'json' }
 
 type PublishTaskFunctionArguments = {
-  ovsxToken: string
-  vsceToken: string
+  'ovsx-token': string
+  'vsce-token': string
 }
 
-export default async ({ ovsxToken, vsceToken }: PublishTaskFunctionArguments) => {
+export const publish = async ({ 'ovsx-token': ovsxToken, 'vsce-token': vsceToken }: PublishTaskFunctionArguments) => {
   if (!ovsxToken && !vsceToken) {
     await tscli.$`log -brnx Open VSX Registry or Visual Studio Marketplace access token required + echo + help`
     return 1

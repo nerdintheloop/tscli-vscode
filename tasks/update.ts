@@ -4,13 +4,14 @@ import { readdir, readFile, writeFile } from 'node:fs/promises'
 export default async () => {
   await tscli.$`
     log -tWyl update Updating npm modules to their latest versions...
+    cd ${new URL('..', import.meta.url).pathname}
     bun update --latest
     log -Wyl update Auditing npm modules...
     bun audit
     log -Wyl update Modifying executable shebangs...
   `
 
-  await Promise.all(((await readdir('node_modules/.bin')).map(async name => {
+  await Promise.all(((await readdir('node_modules/.bin')).map(async (name: string) => {
     const path = `node_modules/.bin/${name}`
 
     await writeFile(path, (await readFile(path, { encoding: 'utf8' })).replace('#!/usr/bin/env node', '#!/usr/bin/env bun'))

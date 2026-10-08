@@ -1,20 +1,12 @@
 {
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
     "lib": [
-      "ESNext"
+      "esnext"
     ],
-    "module": "ESNext",
-    "moduleDetection": "force",
-    "moduleResolution": "bundler",
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strict": true,
-    "target": "ESNext",
+    "module": "esnext",
+    "types": [
+      "bun",
+      "node"
+    ]
   }
 }

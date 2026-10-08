@@ -1,4 +1,4 @@
-scopeName: tscli
+scopeName: inline.tscli
 
 injectionSelector: "L:source.ts"
 
@@ -7,63 +7,40 @@ patterns:
     end: \`
     patterns:
       - comment: Comment
-        match: (#.*)$
+        match: ^\s*(#.*)$
         captures:
-          1: { name: comment.line.number-sign }
+          1: { name: comment.line.tscli }
 
       - comment: Category
-        match: ^\s*(.*):\s*$
+        match: ^\s*([^#\n]+?):\s*(?=#|$)
         captures:
           1: { name: entity.name.type.tscli }
 
-      - comment: Task
-        match: ^\s*([a-z0-9]+(?:-[a-z0-9]+)*)\s*(?:\s*(.*))?$
+      - comment: Command
+        match: ^\s*([A-Za-z0-9][A-Za-z0-9_-]*)(\*)?(?:\s+([^#]*?))?\s*(?=#|$)
         captures:
           1: { name: entity.name.function.tscli }
-          2: { name: string.unquoted.tscli }
+          2: { name: keyword.operator.alias.tscli }
+          3: { name: string.unquoted.tscli }
 
-      - comment: Task Flag Argument
-        match: ^\s*--([a-z0-9]+(?:-[a-z0-9]+)*)(?:\s+-([a-zA-Z0-9])?)?(?:\s+(number|string))?(?:\s+(.+?))?\s*$
+      - comment: Command Flag Argument
+        match: ^\s*--([a-z][a-z0-9]*(?:-[a-z0-9]+)*)(?:\s+-([a-zA-Z0-9])?)?(?:\s+(number|string))?(?:\s+([^#]*?))?\s*(?=#|$)
         captures:
           1: { name: variable.parameter.tscli }
           2: { name: variable.parameter.tscli }
           3: { name: storage.type.tscli }
           4: { name: string.unquoted.tscli }
 
-      - comment: Task Positional Argument
-        match: ^\s*\.\s*([a-z0-9]+(?:-[a-z0-9]+)*)(?:\s+(number))?(?:\s+(.*?))\s*$
+      - comment: Command Positional Argument
+        match: ^\s*\.\s*([a-z][a-z0-9]*(?:-[a-z0-9]+)*)(?:\s+(number))?(?:\s+([^#]*?))?\s*(?=#|$)
         captures:
           1: { name: variable.parameter.tscli }
           2: { name: storage.type.tscli }
           3: { name: string.unquoted.tscli }
 
-      - comment: Task Rest Argument
-        match: ^\s*\.{3}([a-z0-9]+(?:-[a-z0-9]+)*)?(?:\s+(string))?(?:\s+(.+?))?\s*$
+      - comment: Command Rest Argument
+        match: ^\s*\.{3}([a-z][a-z0-9]*(?:-[a-z0-9]+)*)(?:\s+(string))?(?:\s+([^#]*?))?\s*(?=#|$)
         captures:
           1: { name: variable.parameter.tscli }
           2: { name: storage.type.tscli }
           3: { name: string.unquoted.tscli }
-
-      - comment: ALIAS_BLACKLIST and ALIAS_WHITELIST Runner Variables
-        match: ^\s*(ALIAS_BLACKLIST|ALIAS_WHITELIST)\s+([a-z0-9]+(?:\s+[a-z0-9]+)*)\s*$
-        captures:
-          1: { name: variable.language.tscli }
-          2: { name: string.unquoted.tscli }
-
-      - comment: CHILD_PROCESS_ENV Runner Variable
-        match: ^\s*(CHILD_PROCESS_ENV)\s+([\w-]+(?:\s+[\w-]+)*)\s*$
-        captures:
-          1: { name: variable.language.tscli }
-          2: { name: string.unquoted.tscli }
-
-      - comment: RUNTIME_FLAGS Runner Variable
-        match: ^\s*(RUNTIME_FLAGS)\s+(.+?)\s*$
-        captures:
-          1: { name: variable.language.tscli }
-          2: { name: string.unquoted.tscli }
-
-      - comment: RUNTIME_REQUIRED Runner Variable
-        match: ^\s*(RUNTIME_REQUIRED)\s+(bun|deno|node)\s*$
-        captures:
-          1: { name: variable.language.tscli }
-          2: { name: string.unquoted.tscli }
